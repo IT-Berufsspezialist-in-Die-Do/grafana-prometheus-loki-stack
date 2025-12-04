@@ -19,7 +19,7 @@ Voraussetzung: Dein Setup-Skript hat bereits Grafana, Prometheus, Loki, Promtail
 1. Ermittele die IP deiner VM (z. B. mit `ip a` oder im Cloud-Panel).
 2. Öffne im Browser:
 
-   http:// <vm-ip> :3000
+   http://vm-ip:3000
 
 3. Standard-Login:
    - Benutzername: `admin`
