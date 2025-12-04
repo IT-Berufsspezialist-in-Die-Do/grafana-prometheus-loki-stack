@@ -126,25 +126,57 @@ sudo systemctl start backend
 ############################################################
 # 2. FRONTEND + NGINX SETUP
 ############################################################
-echo "=== Setting up Frontend ==="
-
-sudo mkdir -p /var/www/frontend
+echo "=== Creating frontend HTML ==="
 
 sudo tee /var/www/frontend/index.html >/dev/null <<'EOF'
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Demo Frontend</title>
+    <meta charset="UTF-8">
+    <title>Monitoring Demo Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        pre {
+            background: #eee;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
-  <h1>Frontend läuft!</h1>
-  <button onclick="loadUsers()">Load Users</button>
-  <pre id="output"></pre>
 
-  <script src="script.js"></script>
+<h1>Monitoring Demo Frontend</h1>
+
+<p>Dieses Frontend testet die Endpunkte des Backends (Port 3001).</p>
+
+<button onclick="callApi('/')">GET /</button>
+<button onclick="callApi('/error')">GET /error</button>
+<button onclick="callApi('/metrics')">GET /metrics</button>
+<button onclick="callApi('/users')">GET /users</button>
+<button onclick="callApi('/busy')">Lasttest - CPU brennt</button>
+<button onclick="callApi('/spam')">Spamming Logs</button>
+<button onclick="checkStatus('/')">Check Backend Status</button>
+
+<h2>Response</h2>
+<pre id="output">Bitte einen Button drücken…</pre>
+
+<script src="script.js"></script>
 </body>
 </html>
 EOF
+
 
 echo "=== Creating frontend JavaScript ==="
 
